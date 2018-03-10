@@ -44,6 +44,7 @@ const OverlayContainer = styled.div`
 `
 
 const Overlay  = styled.div`
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   position: fixed;
   top: 0;
   left: 0;
