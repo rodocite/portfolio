@@ -1,7 +1,7 @@
 import Nav from './Nav'
 import Hamburger from './Hamburger'
 import styled from 'styled-components'
-import { TweenMax, Power2 } from 'gsap'
+import { TweenMax } from 'gsap'
 
 const Grid = styled.div`
   opacity: 0;
@@ -40,7 +40,7 @@ const Footer = styled.div`
 
 class Layout extends React.Component {
   componentDidMount() {
-    TweenMax.to(['.layout-transition'], 0.5, { opacity: 1, ease: Power2.easeInOut })
+    TweenMax.to(['.layout-transition'], 0.5, { opacity: 1 })
   }
 
   render() {

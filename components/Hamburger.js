@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { TweenMax, Circ } from 'gsap'
+import { TweenMax } from 'gsap'
 
 const Button = styled.div`
   cursor: pointer;
@@ -49,7 +49,7 @@ const Overlay  = styled.div`
   top: 0;
   left: 0;
   pointer-events: ${ props => props.closed ? 'none' : 'all' };
-  opacity: ${ props => props.closed ? '0' : '1' };
+  opacity: ${ props => props.closed ? 0 : 1 };
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -94,9 +94,9 @@ class Hamburger extends React.Component {
 
   componentDidUpdate() {
     if(!this.state.close) {
-      TweenMax.to(['.hamburger-menu'], 0.3, { left: '0vw', opacity: 1, ease: Circ.easeInOut })
+      TweenMax.to(['.hamburger-menu'], 0.3, { left: '0vw' })
     } else {
-      TweenMax.to(['.hamburger-menu'], 0.5, { left: '-100vw', opacity: 0, ease: Circ.easeInOut })
+      TweenMax.to(['.hamburger-menu'], 0.3, { left: '-100vw' })
     }
   }
 
