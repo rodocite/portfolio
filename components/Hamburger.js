@@ -69,6 +69,7 @@ const Menu  = styled.div`
   transform: rotateY(0deg);
   background: white;
   z-index: 15;
+
   @media (min-width: 768px) {
     width: 250px;
   }
@@ -76,12 +77,14 @@ const Menu  = styled.div`
 
 const Close = styled.div`
   align-self: flex-end;
-  font-size: 42px;
+  font-size: 60px;
   line-height: 0.5;
-  width: 24px;
-  height: 24px;
   cursor: pointer;
   margin-bottom: 40px;
+
+  @media (min-width: 768px) {
+    font-size: 42px;
+  }
 `
 
 class Hamburger extends React.Component {

@@ -5,11 +5,15 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 15px;
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
   line-height: 23px;
   color: #111111;
+
+  @media (min-width: 768px) {
+    font-size: 15px;
+  }
 `
 
 const LinkTag = styled.a`
@@ -20,14 +24,12 @@ const LinkTag = styled.a`
   transition: color 300ms ease-in-out, margin 600ms ease-in-out;
 
   :hover {
-    & span {
-      margin-left: 5px;
-      opacity: 1;
+    @media (min-width: 768px) {
+      & span {
+        margin-left: 5px;
+        opacity: 1;
+      }
     }
-  }
-
-  :active {
-    color: red;
   }
 `
 
@@ -61,7 +63,6 @@ const renderNavList = (list) => (
 
 const about = [
   { href: '/', text: 'Home' },
-  { href: '/about', text: 'Who am I?'},
 ]
 
 const Nav = (props) => {
