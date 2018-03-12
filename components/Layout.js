@@ -24,6 +24,9 @@ const Grid = styled.div`
 
 const Header = styled.div`
   grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const GridNav = styled.div`
@@ -38,9 +41,32 @@ const Footer = styled.div`
   grid-area: footer;
 `
 
+const Logo = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #111111
+`
+
 class Layout extends React.Component {
+  state = {
+    isDesktop: false
+  }
+
   componentDidMount() {
+    const mq = window.matchMedia('(min-width: 768px)')
+
+    mq.addListener(() => {
+      this.setState({ isDesktop: mq.matches })
+    })
+
+    this.setState({ isDesktop: mq.matches })
+
     TweenMax.to(['.layout-transition'], 0.5, { opacity: 1 })
+  }
+
+  renderLogo() {
+    return this.state.isDesktop
+      ? <Logo>Rodolfo Yabut</Logo>
+      : <Logo>Rodo</Logo>
   }
 
   render() {
@@ -50,6 +76,7 @@ class Layout extends React.Component {
           <Hamburger>
             <Nav />
           </Hamburger>
+          { this.renderLogo() }
         </Header>
         <Content>
           { this.props.children }
