@@ -33,7 +33,7 @@ export default ({ children }) => (
   <Layout>
     <Copy>
       <p>I'm a Software Engineer who specializes in modern Javascript!
-      You can rely on me to deliver on all of your front-end needs especially if you're looking
+      You can rely on me to deliver on your front-end needs if you're looking
       for someone experienced in React and Redux.</p>
       <p>This site is intended to showcase my toy projects. The code for this site and projects on it are all on Github for you to see.</p>
     </Copy>
