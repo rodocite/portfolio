@@ -3,13 +3,14 @@ import Link from 'next/link'
 import { withRouter } from 'next/router'
 
 const LinkTag = styled.a`
-  color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  text-decoration: none;
-  padding: 5px;
   background: #111111;
   border-radius: 7px;
-  pointer-events: all;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  width: 100px;
 `
 
 class RepoLink extends React.Component {
@@ -22,7 +23,7 @@ class RepoLink extends React.Component {
       : null
 
     return githubPath && (
-      <LinkTag href={ githubPath } target="_blank">Peep the code</LinkTag>
+      <LinkTag href={ githubPath } target="_blank">Peep Code</LinkTag>
     )
   }
 }

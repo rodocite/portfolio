@@ -5,15 +5,16 @@ import styled from 'styled-components'
 import { TweenMax } from 'gsap'
 
 const Grid = styled.div`
+  display: grid;
+  grid-gap: 10px;
   opacity: 0;
   padding: 40px;
-  display: grid;
-  grid-gap: 20px;
   grid-template-areas:
     "header"
     "nav"
     "content"
     "footer";
+
   @media (min-width: 768px) {
     max-width: 700px;
   }
@@ -24,17 +25,25 @@ const Grid = styled.div`
 `
 
 const Header = styled.div`
-  grid-area: header;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  grid-area: header;
 `
+
 const Content = styled.div`
   grid-area: content;
 `
 
-const Footer = styled.div`
-  grid-area: footer;
+const RepoLinkContainer = styled.div`
+  margin-top: 30px;
 `
+
+const Peep = () => (
+  <RepoLinkContainer>
+    <RepoLink />
+  </RepoLinkContainer>
+)
+
 
 class Layout extends React.Component {
   state = {
@@ -49,15 +58,16 @@ class Layout extends React.Component {
     return (
       <Grid className="layout-transition">
         <Header>
-          <Hamburger>
-            <Nav />
-          </Hamburger>
+          <div>
+            <Hamburger>
+              <Nav />
+            </Hamburger>
+          </div>
+          <Peep />
         </Header>
         <Content>
-          <RepoLink />
           { this.props.children }
         </Content>
-        <Footer />
       </Grid>
     )
   }
