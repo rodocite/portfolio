@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
       <html>
         <meta name="viewport" content="width=device-width" />
         <Head>
-          <title>My page</title>
+          <title>Rodolfo Yabut | Software Engineer</title>
           {this.props.styleTags}
         </Head>
         <body>
