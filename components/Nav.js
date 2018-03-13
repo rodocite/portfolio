@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import { withRouter } from 'next/router'
 import styled from 'styled-components'
 
 const Column = styled.div`
+  color: #111111;
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -9,7 +11,6 @@ const Column = styled.div`
   font-weight: 600;
   letter-spacing: 1px;
   line-height: 23px;
-  color: #111111;
 
   @media (min-width: 768px) {
     font-size: 15px;
@@ -17,12 +18,14 @@ const Column = styled.div`
 `
 
 const LinkTag = styled.a`
-  font-weight: 100;
-  color: #111111;
+  background: ${({ selected }) => selected ? '#111111' : 'none' };
+  color: ${({ selected }) => selected ? 'white' : '#111111' };
   cursor: pointer;
+  font-weight: ${({ selected }) => selected ? 600 : 100 };
+  padding: 10px;
+  pointer-events: ${({ selected }) => selected ? 'none' : 'all' };
   text-decoration: none;
   transition: color 300ms ease-in-out, margin 600ms ease-in-out;
-  padding: 10px;
 
   @media (min-width: 768px) {
     padding: 5px;
@@ -39,9 +42,9 @@ const LinkTag = styled.a`
 `
 
 const Arrow = styled.span`
-  position: absolute;
   margin-left: 0px;
   opacity: 0;
+  position: absolute;
   transition: all 300ms ease-in-out;
 
   &:before {
@@ -50,20 +53,34 @@ const Arrow = styled.span`
 `
 
 const StyledLink = (props) => {
+  const { onClick, text, selected } = props
   return (
-    <LinkTag onClick={props.onClick}>
-      {props.text}
+    <LinkTag
+      onClick={ onClick }
+      selected={ selected }
+    >
+      { text }
       <Arrow />
     </LinkTag>
   )
 }
 
-const renderNavList = (list) => (
-  list.map((member, index) => (
-    <Link href={member.href} key={index}>
-      <StyledLink text={member.text} />
-    </Link>
-  ))
+const renderNavList = (list, pathname) => (
+  list.map((member, index) => {
+    const { href, text } = member
+    const selected = pathname === href
+
+    return (
+      <Link
+        href={ href }
+        key={ index }>
+          <StyledLink
+            text={ text }
+            selected={ selected }
+          />
+      </Link>
+    )
+  })
 )
 
 const about = [
@@ -72,11 +89,13 @@ const about = [
 ]
 
 const Nav = (props) => {
+  const pathname = props.router.pathname
+
   return (
     <Column>
-      {renderNavList(about)}
+      {renderNavList(about, pathname)}
     </Column>
   )
 }
 
-export default Nav
+export default withRouter(Nav)
