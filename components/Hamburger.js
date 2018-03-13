@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const Button = styled.div`
   cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -68,12 +69,14 @@ const Menu  = styled.div`
   flex-direction: column;
   padding: 20px;
   height: 100%;
-  width: 70vw;
+  width: 60vw;
+  box-shadow: 2px 2px 20px 1px rgba(0, 0, 0, 0.2);
   top: 0;
   left: -100vw;
   transform: rotateY(0deg);
   background: white;
   z-index: 15;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   @media (min-width: 768px) {
     width: 250px;
