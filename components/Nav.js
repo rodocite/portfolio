@@ -63,6 +63,7 @@ const renderNavList = (list) => (
 
 const about = [
   { href: '/', text: 'Home' },
+  { href: '/projects/test-project', text: 'Test Project' }
 ]
 
 const Nav = (props) => {
