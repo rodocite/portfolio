@@ -18,11 +18,11 @@ class RepoLink extends React.Component {
     const project = pathname.match('projects')
 
     let githubPath = project
-      ? `https://github.com/rodocite/portfolio/tree/master/${pathname.split('/projects/')[1]}`
+      ? `https://github.com/rodocite/portfolio/tree/master/pages${pathname}.js`
       : null
 
     return githubPath && (
-      <LinkTag href={ githubPath }>Peep the code</LinkTag>
+      <LinkTag href={ githubPath } target="_blank">Peep the code</LinkTag>
     )
   }
 }
