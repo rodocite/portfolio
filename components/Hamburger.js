@@ -89,7 +89,18 @@ const Close = styled.div`
 
 class Hamburger extends React.Component {
   state = {
-    close: true
+    close: true,
+    isDesktop: false
+  }
+
+  componentDidMount() {
+    const mq = window.matchMedia('(min-width: 768px)')
+
+    mq.addListener(() => {
+      this.setState({ isDesktop: mq.matches })
+    })
+
+    this.setState({ isDesktop: mq.matches })
   }
 
   componentDidUpdate() {
@@ -102,6 +113,12 @@ class Hamburger extends React.Component {
 
   show() {
     this.setState({ close: !this.state.close })
+  }
+
+  renderLogo() {
+    return this.state.isDesktop
+      ? <Logo>Rodolfo Yabut</Logo>
+      : <Logo>Rodo</Logo>
   }
 
   renderButton() {
@@ -128,10 +145,11 @@ class Hamburger extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         {this.renderButton()}
+        {this.renderLogo()}
         {this.renderMenu()}
-      </div>
+      </Container>
     )
   }
 }
