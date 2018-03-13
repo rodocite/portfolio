@@ -22,6 +22,11 @@ const LinkTag = styled.a`
   cursor: pointer;
   text-decoration: none;
   transition: color 300ms ease-in-out, margin 600ms ease-in-out;
+  padding: 10px;
+
+  @media (min-width: 768px) {
+    padding: 5px;
+  }
 
   :hover {
     @media (min-width: 768px) {
