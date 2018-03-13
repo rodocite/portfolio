@@ -1,5 +1,6 @@
 import Nav from './Nav'
 import Hamburger from './Hamburger'
+import RepoLink from './RepoLink'
 import styled from 'styled-components'
 import { TweenMax } from 'gsap'
 
@@ -53,6 +54,7 @@ class Layout extends React.Component {
           </Hamburger>
         </Header>
         <Content>
+          <RepoLink />
           { this.props.children }
         </Content>
         <Footer />
