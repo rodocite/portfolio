@@ -1,32 +1,37 @@
 import styled from 'styled-components'
 import { TweenMax } from 'gsap'
 
+const Container = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`
+
 const Button = styled.div`
   cursor: pointer;
   position: relative;
-  height: 50px;
-  width: 60px;
-  @media (min-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 25px;
 `
 
-const lineBase = styled.span`
-  position: absolute;
-  width: 60px;
-  height: 6px;
+const Logo = styled.div`
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 100;
+`
+
+const lineBase = styled.div`
+  width: 50px;
+  margin: 3px 0 3px 0;
+  height: 10px;
   background: ${ props => !props.closed ? 'black' : 'gray'};
   transition: all 200ms ease-in-out;
-  @media (min-width: 768px) {
-    width: 30px;
-    height: 4px;
-  }
 `
 
 const Line1 = lineBase.extend`
   top: ${ props => !props.closed ? '10%' : '50%' };
-  transform: rotate(${ props => !props.closed ? '0deg' : '225deg'});
 `
 
 const Line2 = lineBase.extend`
