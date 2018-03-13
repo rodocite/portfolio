@@ -85,7 +85,7 @@ const renderNavList = (list, pathname) => (
 
 const about = [
   { href: '/', text: 'Home' },
-  { href: '/projects/test-project', text: 'Test Project' }
+  { href: '/projects/fancy-scroll', text: 'Fancy Scroll' }
 ]
 
 const Nav = (props) => {
