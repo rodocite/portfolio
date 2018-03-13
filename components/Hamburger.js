@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 import { TweenMax } from 'gsap'
 
 const Container = styled.div`
@@ -21,6 +22,10 @@ const Logo = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 24px;
   font-weight: 100;
+  & > a {
+    color: #111111;
+    text-decoration: none;
+  }
 `
 
 const lineBase = styled.div`
@@ -125,8 +130,8 @@ class Hamburger extends React.Component {
 
   renderLogo() {
     return this.state.isDesktop
-      ? <Logo>Rodolfo Yabut</Logo>
-      : <Logo>Rodo</Logo>
+      ? <Logo><Link href="/"><a>Rodolfo Yabut</a></Link></Logo>
+      : <Logo><Link href="/"><a>Rodo</a></Link></Logo>
   }
 
   renderButton() {
