@@ -8,7 +8,7 @@ const Grid = styled.div`
   display: grid;
   grid-gap: 10px;
   opacity: 0;
-  padding: 40px;
+  padding: 20px;
   grid-template-areas:
     "header"
     "nav"
@@ -20,6 +20,7 @@ const Grid = styled.div`
   }
 
   @media (min-width: 1024px) {
+    padding: 40px;
     max-width: 900 px;
   }
 `
