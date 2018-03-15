@@ -16,6 +16,7 @@
     "express": "^4.16.2",
     "gsap": "^1.20.4",
     "isomorphic-unfetch": "^2.0.0",
+    "lodash": "^4.17.5",
     "next": "latest",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
