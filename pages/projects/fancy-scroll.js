@@ -4,32 +4,32 @@ import styled from 'styled-components'
 import _ from 'lodash'
 
 const Background = styled.div`
-  padding: ${props => props.color > 0 ? '20px' : '0px'};
-  margin: ${props => props.color > 0 ? '20px' : '0px'};
-  background: ${props => ['black', 'red', 'orange', 'green', 'blue'][props.color]};
-  transition: all 300ms ease-in-out;
   -webkit-overflow-scrolling: auto;
+  background: ${props => ['black', 'red', 'orange', 'green', 'blue'][props.color]};
+  margin: ${props => props.color > 0 ? '20px' : '0px'};
+  padding: ${props => props.color > 0 ? '20px' : '0px'};
+  transition: all 300ms ease-in-out;
 `
 
 const Box = styled.div`
-  position: relative;
-  display: flex;
-  padding: 10px;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 400;
-  justify-content: center;
   align-items: center;
   border: 5px solid white;
-  height: 300px;
   color: white;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  height: 300px;
+  justify-content: center;
   overflow: hidden:
+  padding: 10px;
+  position: relative;
 `
 
 const Text = styled.div`
-  position: absolute;
   font-size: 20px;
-  transform: translateY(-50%);
+  position: absolute;
   top: 50%;
+  transform: translateY(-50%);
 
   @media (min-width: 768px) {
     font-size: 32px;
@@ -40,11 +40,11 @@ const ScrollElement = (props) => {
   const { text, frame } = props
 
   return (
-      <Background color={ frame } id="fancy-scroll-el">
-        <Box>
-          <Text className="fancy-scroll-text">{ text }</Text>
-        </Box>
-      </Background>
+    <Background color={ frame } id="fancy-scroll-el">
+      <Box>
+        <Text className="fancy-scroll-text">{ text }</Text>
+      </Box>
+    </Background>
   )
 }
 
@@ -102,7 +102,7 @@ class FancyScroll extends React.Component {
     }
 
     this.flushStartTouchRecord()
-  }, 250)
+  }, 150)
 
   scrollEvent = _.debounce((e) => {
     const { deltaY } = e
@@ -126,7 +126,7 @@ class FancyScroll extends React.Component {
       'Scroll Me',
       'Again',
       'And Again',
-      'One More time',
+      'One More Time',
       'Fancy'
     ]
 
