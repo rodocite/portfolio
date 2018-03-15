@@ -54,6 +54,7 @@ class FancyScroll extends React.Component {
   }
 
   componentDidMount() {
+    this.startTouchRecord = []
     this.scrollingEl = document.querySelector('#fancy-scroll-el')
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
     this.scrollingEl.addEventListener('touchstart', this.touchStartEvent)
@@ -81,22 +82,27 @@ class FancyScroll extends React.Component {
   touchStartEvent = (touchStartEvent) => {
     touchStartEvent.preventDefault()
     const { screenY: start } = touchStartEvent.touches[0]
-    this.scrollingEl.addEventListener('touchmove', this.touchMoveEvent(start))
+    this.startTouchRecord.push(start)
+    this.scrollingEl.addEventListener('touchmove', this.touchMoveEvent)
   }
 
-  touchMoveEvent = (start) => (touchMoveEvent) => {
+  touchMoveEvent = _.debounce((touchMoveEvent) => {
     const { frame } = this.state
     const { screenY: end } = touchMoveEvent.changedTouches[0]
-    const distance = start - end
+    const start = _.last(this.startTouchRecord)
+    const distance = Math.abs(start - end)
+    const swipedUp = start > end
 
-    if (distance > 30 && frame < 4) {
-      this.setState({ frame: frame + 1 })
+    if (swipedUp && distance > 30 && frame < 4) {
+      this.setState({ frame: this.state.frame + 1 })
     }
 
-    if (distance < -30 && frame > 0) {
-      this.setState({ frame: frame - 1 })
+    if (!swipedUp && distance > 30 && frame > 0) {
+      this.setState({ frame: this.state.frame - 1 })
     }
-  }
+
+    this.flushStartTouchRecord()
+  }, 250)
 
   scrollEvent = _.debounce((e) => {
     const { deltaY } = e
@@ -109,7 +115,11 @@ class FancyScroll extends React.Component {
     if (deltaY < 1 && frame > 0) {
       this.setState({ frame: frame - 1 })
     }
-  }, 250, { maxWait: 300, leading: true, trailing: false })
+  }, 300, { leading: true, trailing: false })
+
+  flushStartTouchRecord() {
+    this.startTouchRecord = []
+  }
 
   render() {
     const textList = [
