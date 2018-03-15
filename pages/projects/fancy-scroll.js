@@ -79,13 +79,12 @@ class FancyScroll extends React.Component {
   }
 
   touchStartEvent = (touchStartEvent) => {
+    touchStartEvent.preventDefault()
     const { screenY: start } = touchStartEvent.touches[0]
     this.scrollingEl.addEventListener('touchmove', this.touchMoveEvent(start))
   }
 
   touchMoveEvent = (start) => (touchMoveEvent) => {
-    touchMoveEvent.preventDefault()
-
     const { frame } = this.state
     const { screenY: end } = touchMoveEvent.changedTouches[0]
     const distance = start - end
