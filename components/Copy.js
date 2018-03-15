@@ -6,6 +6,7 @@ const Text = styled.div`
   letter-spacing: 1.5px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 100;
+
   @media (min-width: 768px) {
     font-size: 35px;
     line-height: 50px;

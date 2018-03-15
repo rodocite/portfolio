@@ -30,6 +30,7 @@ const Text = styled.div`
   font-size: 20px;
   transform: translateY(-50%);
   top: 50%;
+
   @media (min-width: 768px) {
     font-size: 32px;
   }

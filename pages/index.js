@@ -17,7 +17,7 @@ const ListItem = styled.li`
     line-height: 50px;
   }
 
-  & > a {
+  & a {
     color: #111111;
     text-decoration: none;
     border-bottom: 2px solid white;
