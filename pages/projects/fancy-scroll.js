@@ -54,11 +54,6 @@ class FancyScroll extends React.Component {
   }
 
   componentDidMount() {
-    const debounceConfig = {
-      leading: true,
-      trailing: false
-    }
-
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
     this.touchStartListener = window.addEventListener('touchstart', this.touchStartEvent)
     this.scrollListener = window.addEventListener('wheel', this.scrollEvent, { passive: true })
