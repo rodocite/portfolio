@@ -1,4 +1,3 @@
-import { findDOMNode } from 'react-dom'
 import Layout from '../../components/Layout.js'
 import Copy from '../../components/Copy'
 import styled from 'styled-components'
@@ -41,7 +40,7 @@ const ScrollElement = (props) => {
   const { text, frame } = props
 
   return (
-      <Background color={ frame }>
+      <Background color={ frame } id="fancy-scroll-el">
         <Box>
           <Text className="fancy-scroll-text">{ text }</Text>
         </Box>
@@ -55,6 +54,7 @@ class FancyScroll extends React.Component {
   }
 
   componentDidMount() {
+    this.scrollingEl = document.querySelector('#fancy-scroll-el')
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
     this.scrollingEl.addEventListener('touchstart', this.touchStartEvent)
     this.scrollingEl.addEventListener('wheel', this.scrollEvent, { passive: true })
@@ -124,10 +124,9 @@ class FancyScroll extends React.Component {
     return (
       <Layout>
         <ScrollElement
-          text={textList[this.state.frame]}
-          frame={this.state.frame}
-          ref={(el) => this.scrollingEl = findDOMNode(el)}
-      />
+          text={ textList[this.state.frame] }
+          frame={ this.state.frame }
+        />
       </Layout>
     )
   }
