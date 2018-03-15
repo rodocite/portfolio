@@ -1,3 +1,4 @@
+import { findDOMNode } from 'react-dom'
 import Layout from '../../components/Layout.js'
 import Copy from '../../components/Copy'
 import styled from 'styled-components'
@@ -55,8 +56,8 @@ class FancyScroll extends React.Component {
 
   componentDidMount() {
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
-    this.touchStartListener = window.addEventListener('touchstart', this.touchStartEvent)
-    this.scrollListener = window.addEventListener('wheel', this.scrollEvent, { passive: true })
+    this.scrollingEl.addEventListener('touchstart', this.touchStartEvent)
+    this.scrollingEl.addEventListener('wheel', this.scrollEvent, { passive: true })
   }
 
   componentWillUpdate(__, prevState) {
@@ -72,17 +73,19 @@ class FancyScroll extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('wheel', this.scrollEvent, { passive: true })
-    window.removeEventListener('touchstart', this.touchStartEvent)
-    window.removeEventListener('touchmove', this.touchMoveEvent)
+    this.scrollingEl.removeEventListener('wheel', this.scrollEvent, { passive: true })
+    this.scrollingEl.removeEventListener('touchstart', this.touchStartEvent)
+    this.scrollingEl.removeEventListener('touchmove', this.touchMoveEvent)
   }
 
   touchStartEvent = (touchStartEvent) => {
     const { screenY: start } = touchStartEvent.touches[0]
-    window.addEventListener('touchmove', this.touchMoveEvent(start))
+    this.scrollingEl.addEventListener('touchmove', this.touchMoveEvent(start))
   }
 
   touchMoveEvent = (start) => (touchMoveEvent) => {
+    touchMoveEvent.preventDefault()
+
     const { frame } = this.state
     const { screenY: end } = touchMoveEvent.changedTouches[0]
     const distance = start - end
@@ -120,7 +123,11 @@ class FancyScroll extends React.Component {
 
     return (
       <Layout>
-        <ScrollElement text={textList[this.state.frame]} frame={this.state.frame} />
+        <ScrollElement
+          text={textList[this.state.frame]}
+          frame={this.state.frame}
+          ref={(el) => this.scrollingEl = findDOMNode(el)}
+      />
       </Layout>
     )
   }
