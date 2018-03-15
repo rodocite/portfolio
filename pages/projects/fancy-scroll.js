@@ -89,12 +89,12 @@ class FancyScroll extends React.Component {
     const { screenY: end } = touchMoveEvent.changedTouches[0]
     const distance = start - end
 
-    if (distance > 100 && frame < 4) {
-      if (frame < 4) this.setState({ frame: frame + 1 })
+    if (distance > 30 && frame < 4) {
+      this.setState({ frame: frame + 1 })
     }
 
-    if (distance < -100 && frame > 0) {
-      if (frame > 0) this.setState({ frame: frame - 1 })
+    if (distance < -30 && frame > 0) {
+      this.setState({ frame: frame - 1 })
     }
   }
 
