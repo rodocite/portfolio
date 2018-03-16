@@ -86,9 +86,9 @@ class FancyScroll extends React.Component {
     }
   }
 
-  touchStartEvent = (touchStartEvent) => {
-    touchStartEvent.preventDefault()
-    const { screenY: start } = touchStartEvent.touches[0]
+  touchStartEvent = (e) => {
+    e.preventDefault()
+    const { screenY: start } = e.touches[0]
     this.startTouchRecord.push(start)
   }
 
@@ -139,11 +139,11 @@ class FancyScroll extends React.Component {
     return (
       <Layout>
         <ScrollElement
-          wheelHandler={ this.wheelEvent }
-          touchStartHandler={ this.touchStartEvent }
-          touchMoveHandler={ this.touchMoveEvent }
-          text={ textList[this.state.frame] }
           frame={ this.state.frame }
+          text={ textList[this.state.frame] }
+          touchMoveHandler={ this.touchMoveEvent }
+          touchStartHandler={ this.touchStartEvent }
+          wheelHandler={ this.wheelEvent }
         />
       </Layout>
     )
