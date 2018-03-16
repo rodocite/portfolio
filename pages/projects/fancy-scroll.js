@@ -50,10 +50,7 @@ const ScrollElement = (props) => {
       color={ frame }
       id="fancy-scroll-el"
       onWheel={ wheelHandler }
-      onTouchStart={(e) => {
-        e.persist()
-        touchStartHandler(e)
-      }}
+      onTouchStart={ touchStartHandler }
       onTouchMove={(e) => {
         e.persist();
         touchMoveHandler(e)
