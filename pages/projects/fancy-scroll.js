@@ -52,7 +52,7 @@ const ScrollElement = (props) => {
       onWheel={ wheelHandler }
       onTouchStart={ touchStartHandler }
       onTouchMove={(e) => {
-        e.persist();
+        e.persist()
         touchMoveHandler(e)
       }}
     >
