@@ -89,11 +89,6 @@ class FancyScroll extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    this.scrollingEl.removeEventListener('touchstart', this.touchStartEvent)
-    this.scrollingEl.removeEventListener('touchmove', this.touchMoveEvent)
-  }
-
   touchStartEvent = (touchStartEvent) => {
     touchStartEvent.preventDefault()
     const { screenY: start } = touchStartEvent.touches[0]
