@@ -37,10 +37,28 @@ const Text = styled.div`
 `
 
 const ScrollElement = (props) => {
-  const { text, frame } = props
+  const {
+    text,
+    frame,
+    wheelHandler,
+    touchStartHandler,
+    touchMoveHandler
+  } = props
 
   return (
-    <Background color={ frame } id="fancy-scroll-el">
+    <Background
+      color={ frame }
+      id="fancy-scroll-el"
+      onWheel={ wheelHandler }
+      onTouchStart={(e) => {
+        e.persist()
+        touchStartHandler(e)
+      }}
+      onTouchMove={(e) => {
+        e.persist();
+        touchMoveHandler(e)
+      }}
+    >
       <Box>
         <Text className="fancy-scroll-text">{ text }</Text>
       </Box>
@@ -53,12 +71,10 @@ class FancyScroll extends React.Component {
     frame: 0
   }
 
+  startTouchRecord = []
+
   componentDidMount() {
-    this.startTouchRecord = []
-    this.scrollingEl = document.querySelector('#fancy-scroll-el')
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
-    this.scrollingEl.addEventListener('touchstart', this.touchStartEvent)
-    this.scrollingEl.addEventListener('wheel', this.scrollEvent, { passive: true })
   }
 
   componentWillUpdate(__, prevState) {
@@ -74,7 +90,6 @@ class FancyScroll extends React.Component {
   }
 
   componentWillUnmount() {
-    this.scrollingEl.removeEventListener('wheel', this.scrollEvent, { passive: true })
     this.scrollingEl.removeEventListener('touchstart', this.touchStartEvent)
     this.scrollingEl.removeEventListener('touchmove', this.touchMoveEvent)
   }
@@ -83,12 +98,11 @@ class FancyScroll extends React.Component {
     touchStartEvent.preventDefault()
     const { screenY: start } = touchStartEvent.touches[0]
     this.startTouchRecord.push(start)
-    this.scrollingEl.addEventListener('touchmove', this.touchMoveEvent)
   }
 
-  touchMoveEvent = _.debounce((touchMoveEvent) => {
+  touchMoveEvent = _.debounce((e) => {
     const { frame } = this.state
-    const { screenY: end } = touchMoveEvent.changedTouches[0]
+    const { screenY: end } = e.changedTouches[0]
     const start = _.last(this.startTouchRecord)
     const distance = Math.abs(start - end)
     const swipedUp = start > end
@@ -104,7 +118,7 @@ class FancyScroll extends React.Component {
     this.flushStartTouchRecord()
   }, 150)
 
-  scrollEvent = _.debounce((e) => {
+  wheelEvent = _.debounce((e) => {
     const { deltaY } = e
     const { frame } = this.state
 
@@ -115,7 +129,7 @@ class FancyScroll extends React.Component {
     if (deltaY < 1 && frame > 0) {
       this.setState({ frame: frame - 1 })
     }
-  }, 300, { leading: true, trailing: false })
+  }, 30, { leading: true, trailing: false })
 
   flushStartTouchRecord() {
     this.startTouchRecord = []
@@ -133,6 +147,9 @@ class FancyScroll extends React.Component {
     return (
       <Layout>
         <ScrollElement
+          wheelHandler={ this.wheelEvent }
+          touchStartHandler={ this.touchStartEvent }
+          touchMoveHandler={ this.touchMoveEvent }
           text={ textList[this.state.frame] }
           frame={ this.state.frame }
         />
