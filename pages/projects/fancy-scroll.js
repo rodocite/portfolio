@@ -121,7 +121,7 @@ class FancyScroll extends React.Component {
     if (deltaY < 1 && frame > 0) {
       this.setState({ frame: frame - 1 })
     }
-  }, 30, { leading: true, trailing: false })
+  }, 100, { leading: true, trailing: false })
 
   flushStartTouchRecord() {
     this.startTouchRecord = []
