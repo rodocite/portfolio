@@ -68,7 +68,7 @@ class FancyScroll extends React.Component {
     frame: 0
   }
 
-  startTouchRecord = []
+  startTouchList = []
 
   componentDidMount() {
     TweenMax.fromTo('.fancy-scroll-text', 0.4, { opacity: 0 }, { opacity: 1 })
@@ -89,13 +89,13 @@ class FancyScroll extends React.Component {
   touchStartEvent = (e) => {
     e.preventDefault()
     const { screenY: start } = e.touches[0]
-    this.startTouchRecord.push(start)
+    this.startTouchList.push(start)
   }
 
   touchMoveEvent = _.debounce((e) => {
     const { frame } = this.state
     const { screenY: end } = e.changedTouches[0]
-    const start = _.last(this.startTouchRecord)
+    const start = _.last(this.startTouchList)
     const distance = Math.abs(start - end)
     const swipedUp = start > end
 
