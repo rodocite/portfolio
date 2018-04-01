@@ -114,11 +114,11 @@ class FancyScroll extends React.Component {
     const { deltaY } = e
     const { frame } = this.state
 
-    if (deltaY > 1 && frame < 4) {
+    if (deltaY >= 1 && frame < 4) {
       this.setState({ frame: frame + 1 })
     }
 
-    if (deltaY < 1 && frame > 0) {
+    if (deltaY < 0 && frame > 0) {
       this.setState({ frame: frame - 1 })
     }
   }, 100, { leading: true, trailing: false })
